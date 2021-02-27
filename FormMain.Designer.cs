@@ -64,6 +64,7 @@ namespace SoftSensConf
             this.buttonRead = new System.Windows.Forms.Button();
             this.labelTagname = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonSaveGraph = new System.Windows.Forms.Button();
             this.textBoxConnectStatus3 = new System.Windows.Forms.TextBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.buttonClearData = new System.Windows.Forms.Button();
@@ -85,7 +86,6 @@ namespace SoftSensConf
             this.timerStatus = new System.Windows.Forms.Timer(this.components);
             this.timerStatusReceive = new System.Windows.Forms.Timer(this.components);
             this.timerConnection = new System.Windows.Forms.Timer(this.components);
-            this.buttonSaveGraph = new System.Windows.Forms.Button();
             this.saveFileDialogGraph = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -427,6 +427,17 @@ namespace SoftSensConf
             this.tabPage3.Text = "Monitoring";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // buttonSaveGraph
+            // 
+            this.buttonSaveGraph.Location = new System.Drawing.Point(860, 459);
+            this.buttonSaveGraph.Name = "buttonSaveGraph";
+            this.buttonSaveGraph.Size = new System.Drawing.Size(108, 35);
+            this.buttonSaveGraph.TabIndex = 14;
+            this.buttonSaveGraph.Text = "S&ave graph";
+            this.toolTip1.SetToolTip(this.buttonSaveGraph, "Save the graph as image");
+            this.buttonSaveGraph.UseVisualStyleBackColor = true;
+            this.buttonSaveGraph.Click += new System.EventHandler(this.buttonSaveGraph_Click);
+            // 
             // textBoxConnectStatus3
             // 
             this.textBoxConnectStatus3.BackColor = System.Drawing.Color.Red;
@@ -496,9 +507,9 @@ namespace SoftSensConf
             // listBoxValues
             // 
             this.listBoxValues.ItemHeight = 20;
-            this.listBoxValues.Location = new System.Drawing.Point(57, 218);
+            this.listBoxValues.Location = new System.Drawing.Point(47, 218);
             this.listBoxValues.Name = "listBoxValues";
-            this.listBoxValues.Size = new System.Drawing.Size(82, 224);
+            this.listBoxValues.Size = new System.Drawing.Size(101, 224);
             this.listBoxValues.TabIndex = 6;
             this.listBoxValues.TabStop = false;
             // 
@@ -595,17 +606,6 @@ namespace SoftSensConf
             // 
             this.timerConnection.Interval = 10;
             this.timerConnection.Tick += new System.EventHandler(this.timerConnection_Tick);
-            // 
-            // buttonSaveGraph
-            // 
-            this.buttonSaveGraph.Location = new System.Drawing.Point(860, 459);
-            this.buttonSaveGraph.Name = "buttonSaveGraph";
-            this.buttonSaveGraph.Size = new System.Drawing.Size(108, 35);
-            this.buttonSaveGraph.TabIndex = 14;
-            this.buttonSaveGraph.Text = "S&ave graph";
-            this.toolTip1.SetToolTip(this.buttonSaveGraph, "Save the graph as image");
-            this.buttonSaveGraph.UseVisualStyleBackColor = true;
-            this.buttonSaveGraph.Click += new System.EventHandler(this.buttonSaveGraph_Click);
             // 
             // saveFileDialogGraph
             // 
