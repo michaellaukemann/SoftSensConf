@@ -350,7 +350,6 @@ namespace SoftSensConf
                 
 
             }
-
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -473,8 +472,6 @@ namespace SoftSensConf
                         textBoxStatus.BackColor = System.Drawing.Color.Red;
                     }
 
-
-
                     timerChartAdd.Enabled = true;
                     timerStatusReceive.Enabled = false;
                 }
@@ -527,9 +524,7 @@ namespace SoftSensConf
             {
                 filename = saveFileDialogGraph.FileName;
                 chartValues.SaveImage(filename, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
-                
-
-                
+                  
             }
         }
     }
