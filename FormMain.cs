@@ -102,45 +102,53 @@ namespace SoftSensConf
         {
             if (SerialPort.IsOpen)
             {
-                SerialPort.WriteLine("readconf");
 
-                textBoxTagname.Clear();
-                textBoxTagname.AppendText("Waiting for data");
-                textBoxLRV.Clear();
-                textBoxLRV.AppendText("Waiting for data");
-                textBoxURV.Clear();
-                textBoxURV.AppendText("Waiting for data");
-                textBoxAL.Clear();
-                textBoxAL.AppendText("Waiting for data");
-                textBoxAH.Clear();
-                textBoxAH.AppendText("Waiting for data");
-
-
-                Thread.Sleep(1200);                       // Venter på svar fra arduino
-                string availabledata = "";
-                availabledata = SerialPort.ReadExisting().ToString();
-                string[] analogReadings = availabledata.Split(';');
-
-
-                if (analogReadings.Length == 5)
+                if (timerChartAdd.Enabled == true || timerSerialReceive.Enabled == true || timerStatus.Enabled == true || timerStatusReceive.Enabled == true)
                 {
-                    textBoxTagname.Text = analogReadings[0];
-                    textBoxLRV.Text = analogReadings[1];
-                    textBoxURV.Text = analogReadings[2];
-                    textBoxAL.Text = analogReadings[3];
-                    textBoxAH.Text = analogReadings[4];
+                    MessageBox.Show("Stop monitoring before loading config from instrument.", "Monitoring in progress", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    MessageBox.Show("Failed to load configuration from instrument. Setting to default values.", "Read", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    instrumentConfigs = defaultConfig.Split(';');
-                    textBoxTagname.Text = instrumentConfigs[0];
-                    textBoxLRV.Text = instrumentConfigs[1];
-                    textBoxURV.Text = instrumentConfigs[2];
-                    textBoxAL.Text = instrumentConfigs[3];
-                    textBoxAH.Text = instrumentConfigs[4];
+                    SerialPort.WriteLine("readconf");
 
-                }
+                    textBoxTagname.Clear();
+                    textBoxTagname.AppendText("Waiting for data");
+                    textBoxLRV.Clear();
+                    textBoxLRV.AppendText("Waiting for data");
+                    textBoxURV.Clear();
+                    textBoxURV.AppendText("Waiting for data");
+                    textBoxAL.Clear();
+                    textBoxAL.AppendText("Waiting for data");
+                    textBoxAH.Clear();
+                    textBoxAH.AppendText("Waiting for data");
+
+
+                    Thread.Sleep(1200);                       // Venter på svar fra arduino
+                    string availabledata = "";
+                    availabledata = SerialPort.ReadExisting().ToString();
+                    string[] analogReadings = availabledata.Split(';');
+
+
+                    if (analogReadings.Length == 5)
+                    {
+                        textBoxTagname.Text = analogReadings[0];
+                        textBoxLRV.Text = analogReadings[1];
+                        textBoxURV.Text = analogReadings[2];
+                        textBoxAL.Text = analogReadings[3];
+                        textBoxAH.Text = analogReadings[4];
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to load configuration from instrument. Setting to default values", "Read", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        instrumentConfigs = defaultConfig.Split(';');
+                        textBoxTagname.Text = instrumentConfigs[0];
+                        textBoxLRV.Text = instrumentConfigs[1];
+                        textBoxURV.Text = instrumentConfigs[2];
+                        textBoxAL.Text = instrumentConfigs[3];
+                        textBoxAH.Text = instrumentConfigs[4];
+
+                    }
+                }  
             }
             else
             {
@@ -188,7 +196,7 @@ namespace SoftSensConf
                 }
                 else
                 {
-                    MessageBox.Show("Not able to load data from file", "Load from file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Not able to load data from file. Please try again", "Load from file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -203,41 +211,48 @@ namespace SoftSensConf
         {
             if (SerialPort.IsOpen)
             {
-                if (textBoxTagname.Text == "" || textBoxLRV.Text == "" || textBoxURV.Text == "" || textBoxAL.Text == "" || textBoxAH.Text == "")
+
+                if (timerChartAdd.Enabled == true || timerSerialReceive.Enabled == true || timerStatus.Enabled == true || timerStatusReceive.Enabled == true)
                 {
-                    MessageBox.Show("Enter all configurations", "Configurations", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Stop monitoring before writing config to instrument", "Monitoring in progress", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    FormLogin login = new FormLogin();
-
-                    if (login.ShowDialog() == DialogResult.OK)
+                    if (textBoxTagname.Text == "" || textBoxLRV.Text == "" || textBoxURV.Text == "" || textBoxAL.Text == "" || textBoxAH.Text == "")
                     {
-                        string writeString;
+                        MessageBox.Show("Enter all configurations", "Configurations", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        FormLogin login = new FormLogin();
 
-                        string passwordstring = FormLogin.passwordstring;
-                        string[] config = { textBoxTagname.Text + ";" + textBoxLRV.Text + ";" + textBoxURV.Text + ";" + textBoxAL.Text + ";" + textBoxAH.Text };
-
-                        writeString = "writeconf>" + passwordstring + ">" + string.Join(",", config);
-
-                        //textBoxTagname.Text = writeString;      // Test
-
-                        SerialPort.WriteLine(writeString);
-
-                        Thread.Sleep(1500);                       // Venter på svar fra arduino
-                        string confirmation;
-                        confirmation = SerialPort.ReadExisting();
-
-                        if (confirmation == "1")
+                        if (login.ShowDialog() == DialogResult.OK)
                         {
-                            MessageBox.Show("Config values successfully dowloaded to instrument", "Downloaded" ,MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Wrong password", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            string writeString;
+
+                            string passwordstring = FormLogin.passwordstring;
+                            string[] config = { textBoxTagname.Text + ";" + textBoxLRV.Text + ";" + textBoxURV.Text + ";" + textBoxAL.Text + ";" + textBoxAH.Text };
+
+                            writeString = "writeconf>" + passwordstring + ">" + string.Join(",", config);
+
+
+                            SerialPort.WriteLine(writeString);
+
+                            Thread.Sleep(1200);                       // Venter på svar fra arduino
+                            string confirmation;
+                            confirmation = SerialPort.ReadExisting();
+
+                            if (confirmation == "1")
+                            {
+                                MessageBox.Show("Config values successfully dowloaded to instrument", "Downloaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Wrong password", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
-                }
+                } 
             }
             else
             {
@@ -283,10 +298,12 @@ namespace SoftSensConf
             {
                 if (comboBoxSignal.Text == "Raw")
                 {
+                    chartValues.Series[0].Name = "Raw";
                     SerialPort.WriteLine("readraw");
                 }
                 else if (comboBoxSignal.Text == "Scaled")
                 {
+                    chartValues.Series[0].Name = "Scaled";
                     SerialPort.WriteLine("readscaled");
                 }
 
@@ -307,7 +324,7 @@ namespace SoftSensConf
                     string availableData = "";
                     availableData = SerialPort.ReadExisting().ToString();
 
-                    listBoxValues.Items.Add(availableData);
+                    listBoxValues.Items.Insert(0, availableData);
 
                     if (comboBoxSignal.Text == "Raw")
                     {
@@ -319,7 +336,7 @@ namespace SoftSensConf
                     {
 
                         measuredPoint = new MeasurementPoint(DateTime.Now.ToLongTimeString(), (availableData));
-                        chartValues.Series[1].Points.AddXY(measuredPoint.time, measuredPoint.vab);
+                        chartValues.Series[0].Points.AddXY(measuredPoint.time, measuredPoint.vab);
                         allMeasurementPoints.Add(measuredPoint);
 
                     }
@@ -331,7 +348,6 @@ namespace SoftSensConf
             catch (Exception)
             {
                 
-                //MessageBox.Show("Connection lost. Please check your connection", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
 
@@ -474,14 +490,10 @@ namespace SoftSensConf
         {
             listBoxValues.Items.Clear();
             chartValues.Series[0].Points.Clear();
-            chartValues.Series[1].Points.Clear();
+            chartValues.Series[0].Name = "Data";
             textBoxStatus.Text = "";
         }
 
-        private void chartValues_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboBoxSignal_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -503,6 +515,20 @@ namespace SoftSensConf
                 textBoxConnectStatus3.Text = "Not connected";
                 textBoxConnectStatus3.BackColor = System.Drawing.Color.Red;
                 MessageBox.Show("Connection lost. Please check your connection", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+            }
+        }
+
+        private void buttonSaveGraph_Click(object sender, EventArgs e)
+        {
+            string filename;
+            
+            if (saveFileDialogGraph.ShowDialog() == DialogResult.OK)
+            {
+                filename = saveFileDialogGraph.FileName;
+                chartValues.SaveImage(filename, System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Jpeg);
+                
+
                 
             }
         }

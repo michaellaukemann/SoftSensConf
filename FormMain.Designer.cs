@@ -30,13 +30,13 @@ namespace SoftSensConf
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title16 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title17 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.Title title18 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.textBoxConnectStatus = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@ namespace SoftSensConf
             this.labelURV = new System.Windows.Forms.Label();
             this.labelLRW = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonWrite = new System.Windows.Forms.Button();
             this.buttonRead = new System.Windows.Forms.Button();
             this.labelTagname = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -85,6 +85,8 @@ namespace SoftSensConf
             this.timerStatus = new System.Windows.Forms.Timer(this.components);
             this.timerStatusReceive = new System.Windows.Forms.Timer(this.components);
             this.timerConnection = new System.Windows.Forms.Timer(this.components);
+            this.buttonSaveGraph = new System.Windows.Forms.Button();
+            this.saveFileDialogGraph = new System.Windows.Forms.SaveFileDialog();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -143,7 +145,7 @@ namespace SoftSensConf
             this.buttonAbout.Name = "buttonAbout";
             this.buttonAbout.Size = new System.Drawing.Size(94, 39);
             this.buttonAbout.TabIndex = 7;
-            this.buttonAbout.Text = "About";
+            this.buttonAbout.Text = "&About";
             this.buttonAbout.UseVisualStyleBackColor = true;
             this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
             // 
@@ -154,7 +156,7 @@ namespace SoftSensConf
             this.buttonDisconnect.Name = "buttonDisconnect";
             this.buttonDisconnect.Size = new System.Drawing.Size(145, 37);
             this.buttonDisconnect.TabIndex = 5;
-            this.buttonDisconnect.Text = "Disconnect";
+            this.buttonDisconnect.Text = "&Disconnect";
             this.toolTip1.SetToolTip(this.buttonDisconnect, "Disconnect from the serial port");
             this.buttonDisconnect.UseVisualStyleBackColor = true;
             this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
@@ -166,7 +168,7 @@ namespace SoftSensConf
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(145, 37);
             this.buttonConnect.TabIndex = 4;
-            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.Text = "&Connect";
             this.toolTip1.SetToolTip(this.buttonConnect, "Connect to the serial port");
             this.buttonConnect.UseVisualStyleBackColor = true;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
@@ -228,7 +230,7 @@ namespace SoftSensConf
             this.tabPage2.Controls.Add(this.labelURV);
             this.tabPage2.Controls.Add(this.labelLRW);
             this.tabPage2.Controls.Add(this.buttonSave);
-            this.tabPage2.Controls.Add(this.buttonUpdate);
+            this.tabPage2.Controls.Add(this.buttonWrite);
             this.tabPage2.Controls.Add(this.buttonRead);
             this.tabPage2.Controls.Add(this.labelTagname);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
@@ -242,11 +244,11 @@ namespace SoftSensConf
             // buttonOpen
             // 
             this.buttonOpen.Cursor = System.Windows.Forms.Cursors.Default;
-            this.buttonOpen.Location = new System.Drawing.Point(119, 349);
+            this.buttonOpen.Location = new System.Drawing.Point(265, 290);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(106, 38);
             this.buttonOpen.TabIndex = 7;
-            this.buttonOpen.Text = "Open";
+            this.buttonOpen.Text = "&Open";
             this.toolTip1.SetToolTip(this.buttonOpen, "Load configuration from file");
             this.buttonOpen.UseVisualStyleBackColor = true;
             this.buttonOpen.Click += new System.EventHandler(this.buttonOpen_Click);
@@ -358,27 +360,27 @@ namespace SoftSensConf
             // 
             this.buttonSave.Cursor = System.Windows.Forms.Cursors.Default;
             this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(265, 349);
+            this.buttonSave.Location = new System.Drawing.Point(393, 290);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(106, 38);
             this.buttonSave.TabIndex = 8;
-            this.buttonSave.Text = "Save";
+            this.buttonSave.Text = "&Save";
             this.toolTip1.SetToolTip(this.buttonSave, "Save configuration to file");
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // buttonUpdate
+            // buttonWrite
             // 
-            this.buttonUpdate.Cursor = System.Windows.Forms.Cursors.Default;
-            this.buttonUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonUpdate.Location = new System.Drawing.Point(538, 95);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(106, 38);
-            this.buttonUpdate.TabIndex = 6;
-            this.buttonUpdate.Text = "Update";
-            this.toolTip1.SetToolTip(this.buttonUpdate, "Download the configuration to the instrument");
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            this.buttonWrite.Cursor = System.Windows.Forms.Cursors.Default;
+            this.buttonWrite.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonWrite.Location = new System.Drawing.Point(538, 95);
+            this.buttonWrite.Name = "buttonWrite";
+            this.buttonWrite.Size = new System.Drawing.Size(106, 38);
+            this.buttonWrite.TabIndex = 6;
+            this.buttonWrite.Text = "&Write";
+            this.toolTip1.SetToolTip(this.buttonWrite, "Download the configuration to the instrument");
+            this.buttonWrite.UseVisualStyleBackColor = true;
+            this.buttonWrite.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonRead
             // 
@@ -388,8 +390,8 @@ namespace SoftSensConf
             this.buttonRead.Name = "buttonRead";
             this.buttonRead.Size = new System.Drawing.Size(106, 38);
             this.buttonRead.TabIndex = 5;
-            this.buttonRead.Text = "Read";
-            this.toolTip1.SetToolTip(this.buttonRead, "Read the current configuration on the instrument");
+            this.buttonRead.Text = "&Read";
+            this.toolTip1.SetToolTip(this.buttonRead, "Load the current configuration on the instrument");
             this.buttonRead.UseVisualStyleBackColor = true;
             this.buttonRead.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
@@ -405,6 +407,7 @@ namespace SoftSensConf
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonSaveGraph);
             this.tabPage3.Controls.Add(this.textBoxConnectStatus3);
             this.tabPage3.Controls.Add(this.labelStatus);
             this.tabPage3.Controls.Add(this.buttonClearData);
@@ -453,7 +456,8 @@ namespace SoftSensConf
             this.buttonClearData.Name = "buttonClearData";
             this.buttonClearData.Size = new System.Drawing.Size(75, 35);
             this.buttonClearData.TabIndex = 3;
-            this.buttonClearData.Text = "Clear";
+            this.buttonClearData.Text = "&Clear";
+            this.toolTip1.SetToolTip(this.buttonClearData, "Clear data");
             this.buttonClearData.UseVisualStyleBackColor = true;
             this.buttonClearData.Click += new System.EventHandler(this.buttonClearData_Click);
             // 
@@ -476,6 +480,7 @@ namespace SoftSensConf
             this.comboBoxSignal.Name = "comboBoxSignal";
             this.comboBoxSignal.Size = new System.Drawing.Size(172, 28);
             this.comboBoxSignal.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.comboBoxSignal, "Choose sensor signal type");
             this.comboBoxSignal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSignal_KeyPress);
             // 
             // textBoxStatus
@@ -491,9 +496,9 @@ namespace SoftSensConf
             // listBoxValues
             // 
             this.listBoxValues.ItemHeight = 20;
-            this.listBoxValues.Location = new System.Drawing.Point(52, 219);
+            this.listBoxValues.Location = new System.Drawing.Point(57, 218);
             this.listBoxValues.Name = "listBoxValues";
-            this.listBoxValues.Size = new System.Drawing.Size(106, 224);
+            this.listBoxValues.Size = new System.Drawing.Size(82, 224);
             this.listBoxValues.TabIndex = 6;
             this.listBoxValues.TabStop = false;
             // 
@@ -512,7 +517,8 @@ namespace SoftSensConf
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(77, 35);
             this.buttonStart.TabIndex = 1;
-            this.buttonStart.Text = "Start";
+            this.buttonStart.Text = "&Start";
+            this.toolTip1.SetToolTip(this.buttonStart, "Start monitoring");
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
@@ -522,38 +528,34 @@ namespace SoftSensConf
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(77, 35);
             this.buttonStop.TabIndex = 2;
-            this.buttonStop.Text = "Stop";
+            this.buttonStop.Text = "S&top";
+            this.toolTip1.SetToolTip(this.buttonStop, "Stop monitoring and save the data");
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonSaveData_Click);
             // 
             // chartValues
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartValues.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartValues.Legends.Add(legend6);
+            chartArea1.Name = "ChartArea1";
+            this.chartValues.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartValues.Legends.Add(legend1);
             this.chartValues.Location = new System.Drawing.Point(320, 0);
             this.chartValues.Name = "chartValues";
-            series11.ChartArea = "ChartArea1";
-            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series11.Legend = "Legend1";
-            series11.Name = "Raw";
-            series12.ChartArea = "ChartArea1";
-            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series12.Legend = "Legend1";
-            series12.Name = "Scaled";
-            this.chartValues.Series.Add(series11);
-            this.chartValues.Series.Add(series12);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "Data";
+            this.chartValues.Series.Add(series1);
             this.chartValues.Size = new System.Drawing.Size(656, 502);
             this.chartValues.TabIndex = 0;
             this.chartValues.TabStop = false;
             this.chartValues.Text = "chartInstrumentValues";
-            title16.Name = "Title1";
-            title17.Name = "Title2";
-            title18.Name = "Title3";
-            this.chartValues.Titles.Add(title16);
-            this.chartValues.Titles.Add(title17);
-            this.chartValues.Titles.Add(title18);
+            title1.Name = "Title1";
+            title2.Name = "Title2";
+            title3.Name = "Title3";
+            this.chartValues.Titles.Add(title1);
+            this.chartValues.Titles.Add(title2);
+            this.chartValues.Titles.Add(title3);
             // 
             // SerialPort
             // 
@@ -579,7 +581,7 @@ namespace SoftSensConf
             // saveFileDialogData
             // 
             this.saveFileDialogData.DefaultExt = "csv";
-            this.saveFileDialogData.FileName = "Values";
+            this.saveFileDialogData.FileName = "Instrument values";
             // 
             // timerStatus
             // 
@@ -594,6 +596,22 @@ namespace SoftSensConf
             this.timerConnection.Interval = 10;
             this.timerConnection.Tick += new System.EventHandler(this.timerConnection_Tick);
             // 
+            // buttonSaveGraph
+            // 
+            this.buttonSaveGraph.Location = new System.Drawing.Point(860, 459);
+            this.buttonSaveGraph.Name = "buttonSaveGraph";
+            this.buttonSaveGraph.Size = new System.Drawing.Size(108, 35);
+            this.buttonSaveGraph.TabIndex = 14;
+            this.buttonSaveGraph.Text = "S&ave graph";
+            this.toolTip1.SetToolTip(this.buttonSaveGraph, "Save the graph as image");
+            this.buttonSaveGraph.UseVisualStyleBackColor = true;
+            this.buttonSaveGraph.Click += new System.EventHandler(this.buttonSaveGraph_Click);
+            // 
+            // saveFileDialogGraph
+            // 
+            this.saveFileDialogGraph.FileName = "Graph";
+            this.saveFileDialogGraph.Filter = "PNG Image|*.png|JPeg Image|*.jpg";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -601,6 +619,7 @@ namespace SoftSensConf
             this.ClientSize = new System.Drawing.Size(984, 535);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SoftSensConf";
@@ -640,7 +659,7 @@ namespace SoftSensConf
         private System.Windows.Forms.Label labelURV;
         private System.Windows.Forms.Label labelLRW;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonWrite;
         private System.Windows.Forms.Label labelTagname;
         private System.Windows.Forms.TextBox textBoxConnectStatus2;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -666,6 +685,8 @@ namespace SoftSensConf
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.TextBox textBoxConnectStatus3;
         private System.Windows.Forms.TextBox textBoxConnectStatus;
+        private System.Windows.Forms.Button buttonSaveGraph;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogGraph;
     }
 }
 
