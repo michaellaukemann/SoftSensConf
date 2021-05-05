@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace SoftSensConf
 {
-    static class SoftSensConf
+    static class SSC
     {
         /// <summary>
         /// The main entry point for the application.
